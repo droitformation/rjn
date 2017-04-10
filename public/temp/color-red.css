@@ -1,0 +1,62 @@
+a {color: #e40043;}
+.post-title h3.title, .post-title h3.title a {
+    color: #e40043;
+}
+blockquote.color {background: #e40043;}
+.dropcap.color {background-color: #e40043;}
+.parallax-background.color .item-mask {background: #e40043;}
+.section.alternate.color {background: #e40043;}
+.menu li a:hover, .menu li.sfHover a, .menu li:hover ul li a:hover, .menu li li:hover ul li a:hover, .menu li ul li.sfHover a {color: #e40043;}
+#three-lines-menu a:hover {background: #e40043;}
+#mobile-menu ul li a.active {background: #e40043;}
+#mobile-menu ul li a:hover {color: #e40043;}
+#footer a:hover {color: #e40043;}
+.bra_tweets .tweet_text a, #footer .bra_tweets .tweet_text a {color: #e40043;}
+.bra_tweets a:hover , #footer .bra_tweets a:hover, .bra_tweets a.twitter_time:hover, #footer .bra_tweets a.twitter_time:hover {color: #e40043;}
+.photostream a .item-mask:hover {background-color: #e40043;}
+.team h2 {color: #e40043;}	
+.team .social-personal li a:hover {color:#e40043;}
+.skills-graph li span {background-color: #e40043;}
+.grey:hover { background-color:#e40043; }
+.highlight1 {background-color: #e40043;}
+.item-info-overlay h3.title, .item-info-overlay h3.title a {color: #e40043;}
+.item-info-overlay .outline:hover {box-shadow: 0 0 0 1px #e40043 inset;	background-color: #e40043;}
+.filterable li.current a {color:#e40043;}
+ul.item-nav li:hover {background: #e40043;}
+.contact-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+    width: 100%;
+    padding: 10px 20px;
+}
+
+
+.widget a:hover {text-decoration: underline; color: #878787;}
+.timeline .post-info a:hover {color: #e40043;}
+.timeline .post-info li.comments a {color: #e40043;}
+.post-title h2.title, .post-title h2.title a {color: #e40043;}
+.comment .author a:hover, .comment .children .author a:hover {color: #e40043;}
+.comment .reply:hover {background-color:#e40043;}
+.comment .children .comment-meta .reply:hover {background-color: #e40043;}
+.archive.fullwidth li:hover .title a {color: #e40043;}
+.archive-nav .tagcloud a:hover {background-color: #e40043;}
+#archive-nav a.active {color: #e40043;}
+
+
+.flex-direction-nav a:hover {background-color:#e40043;}
+
+
+.fwslider nav span:hover {background-color: #e40043;}
+.cbp-fwdots span:hover {border: 2px solid #e40043;background-color: #e40043;}
+.cbp-fwdots span.cbp-fwcurrent {border: 2px solid #e40043;}
+
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover {border: 2px solid #e40043;background-color: #e40043;}
+.bx-wrapper .bx-pager.bx-default-pager a.active {border: 2px solid #e40043;}
+.section.alternate.dark .bx-wrapper .bx-pager.bx-default-pager a:hover {border: 2px solid #e40043;background-color: #e40043;}
+.bx-wrapper .bx-prev:hover, .bx-wrapper .bx-next:hover {background-color:#e40043;}
+
+
+div.jp-play-bar {background-color: #e40043;}
+div.jp-volume-bar-value {background-color: #e40043;}

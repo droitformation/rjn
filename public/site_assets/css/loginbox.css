@@ -1,0 +1,38 @@
+.breadcrumb li{
+    position: relative;
+}
+
+#login-form{
+    margin-bottom: 5px;
+}
+
+#login-content {
+    display: none;
+    position: absolute;
+    top: 38px;
+    right: 0;
+    z-index: 999;
+    background: #fff;
+    background-image: linear-gradient(top, #fff, #eee);
+    padding: 15px;
+    box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+    border-radius: 3px 0 3px 3px;
+}
+
+ul li #login-content {
+    right: 0;
+    width: 300px;
+}
+ul li #login-content .input-group{
+   margin-bottom: 8px;
+}
+
+#login-content .btn-danger{
+    background-color: #bb0037;
+    border-color: #bb0037;
+}
+
+#login-content .btn-danger:hover{
+    background-color: #bb0037;
+    border-color: #bb0037;
+}

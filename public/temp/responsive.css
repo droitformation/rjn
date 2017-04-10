@@ -1,0 +1,228 @@
+
+/*---------------960 Screen size---------------*/
+@media only screen and (min-width: 990px) and (max-width: 1200px) {
+
+    .menu li a {
+        font-size:11px;
+        padding: 0 3px;
+    }
+
+    .logos a{
+        width: 32%;
+        display: inline-block;
+    }
+
+}
+
+/*---------------iPad landscape---------------*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+}
+
+/*---------------iPad portrait---------------*/
+@media only screen and (min-width: 750px) and (max-width: 969px) {
+
+}
+
+/*---------------iPhone landscape---------------*/
+@media only screen and (min-width: 480px) and (max-width: 749px) {
+}
+
+/*--------------iPhone portrait---------------*/
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+
+}
+
+
+/*---------------Blog Responsive CSS---------------*/
+
+/*---------------960 Screen size---------------*/
+@media only screen and (min-width: 970px) and (max-width: 1170px) {
+
+}
+
+/*---------------iPad portrait---------------*/
+@media only screen and (min-width: 750px) and (max-width: 990px) {
+    #sidebar {
+        padding-bottom: 20px;
+        background: none;
+    }
+    #primary-menu{
+        margin-bottom: 10px;
+    }
+    #primary-menu,.menu{
+        float: left;
+    }
+
+    .page-header{
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .logos {
+        position: absolute;
+        right: 0;
+        text-align: left;
+        width: auto;
+    }
+
+    .logos a{
+        width: 100%;
+        display: inline;
+    }
+
+    .fixed{
+        width: 160px;
+        margin-top: 50px;
+        right:70px;
+        position: fixed;
+    }
+
+    #filtering{
+        width: 70%;
+    }
+
+    .row{
+        position: relative;
+    }
+
+    .page-header {
+        padding: 20px 0;
+    }
+
+    .soutiens{
+        top: -45px;
+    }
+
+    .title.soutien{
+        line-height: 20px;
+    }
+
+    .media.soutien-media img{
+        width: 70px;
+    }
+
+}
+
+/*---------------iPhone landscape---------------*/
+@media only screen and (min-width: 480px) and (max-width: 749px) {
+    #sidebar {
+        padding-bottom: 20px;
+        background: none;
+    }
+    #primary-menu{
+        margin-bottom: 10px;
+    }
+    #primary-menu, .menu{
+        float: left;
+    }
+    .logos{
+        text-align: left;
+    }
+    .logos a{
+        width: 100%;
+        display: inline;
+    }
+
+    .soutiens{
+        top: -150px;
+    }
+
+    .soutiens h3.title {
+        text-align: right;
+        width: 100%;
+    }
+
+    .fixed{
+        width: 100%;
+        top: 0;
+        position: relative;
+    }
+
+
+    #sidebar #arret-annees li{
+        display: inline-block;
+        width: 100px;
+    }
+}
+
+/*---------------iPhone portrait---------------*/
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+    #sidebar {
+        width: 100%;
+        background: #ccc;
+    }
+    #primary-menu{
+        margin-bottom: 10px;
+    }
+
+    #about{
+        height:auto;
+    }
+
+    #primary-menu,.menu{
+        float: left;
+    }
+    .logos{
+        text-align: left;
+    }
+    .logos a{
+        width: 100%;
+        display: inline;
+    }
+
+    .page-header .title, .page-header .title a,
+    .page-header .subtitle{
+        font-size: 13px;
+        width: 80%;
+    }
+
+    .soutiens{
+        top: -50px;
+        right: 15px;
+    }
+
+    .soutiens h3.title {
+        text-align: right;
+        width: 100%;
+    }
+
+    .media.soutien-media img{
+        width: 50px;
+    }
+
+    .fixed{
+        width: 100%;
+        top: 0;
+        position: relative;
+    }
+
+    #wrapper{
+        padding-bottom: 0;
+    }
+
+    #filteringApp #inner-content{
+        margin-top: 200px;
+    }
+
+    #sidebar{
+        background: none;
+    }
+
+    #filteringApp #sidebar{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background: none;
+    }
+
+    #filteringApp #sidebar #arret-annees li{
+        display: inline-block;
+        width:110px;
+        font-size: 11px;
+    }
+
+    #filteringApp #sidebar #arret-annees li a{
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,38 @@
+@extends('layouts.login')
+@section('content')
+
+<div class="col-md-12">
+    <div class="panel panel-warning">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('auth/social') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="panel-body">
+                <h4 class="text-center" style="margin-bottom: 15px;">S'identifier via www.publications-droit.ch</h4>
+                <p>Veuillez saisir votre adresse <strong>email</strong> et <strong>mot de passe</strong></p>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" id="email" value="{{ old('email') }}" name="email" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="mot de passe">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="pull-right">
+                    <a href="{{ url('/') }}" class="btn btn-default">Retour au site</a>
+                    <button type="submit" class="btn btn-warning">Envoyer</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@endsection
