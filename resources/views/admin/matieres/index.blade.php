@@ -34,9 +34,10 @@
                                             <td><strong>{!! $matiere->title !!}</strong></td>
                                             <td><a class="btn btn-default btn-sm" href="{{ url('admin/note/matiere/'.$matiere->id) }}">Voir les contenus</a></td>
                                             <td class="text-right">
-                                                {!! Form::open(array('route' => array('admin.matiere.destroy', $matiere->id), 'method' => 'delete')) !!}
+                                                <form action="{{ url('admin/matiere/'.$matiere->id) }}" method="POST">
+                                                    <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
                                                     <button data-action="contenu: {{ $matiere->titre }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                                {!! Form::close() !!}
+                                                </form>
                                             </td>
                                         </tr>
 

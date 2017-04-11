@@ -15,7 +15,8 @@
         <div class="panel panel-midnightblue">
 
             <!-- form start -->
-            {!! Form::model($loi,array('method' => 'PUT','class' => 'form-validation form-horizontal','url' => 'admin/loi/'.$loi->id ))!!}
+            <form action="{{ url('admin/loi/'.$loi->id) }}" method="post" class="form-validation form-horizontal">
+                <input type="hidden" name="_method" value="PUT">{!! csrf_field() !!}
 
                 <div class="panel-heading"><h4>&Eacute;diter loi</h4></div>
                 <div class="panel-body event-info">
@@ -56,7 +57,7 @@
                     </div>
                 </div>
 
-            {!! Form::close() !!}
+            </form>
 
         </div>
     </div>

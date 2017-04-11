@@ -21,12 +21,8 @@
     <div class="col-md-12">
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::model($article,array(
-                'method'        => 'PUT',
-                'class'         => 'form-validation form-horizontal',
-                'url'           => 'admin/article/'.$article->id ))
-            !!}
+            <form action="{{ url('admin/article/'.$article->id) }}" method="post" class="form-validation form-horizontal">
+                <input type="hidden" name="_method" value="PUT">{!! csrf_field() !!}
 
                 <div class="panel-heading"><h4>&Eacute;diter article</h4></div>
                 <div class="panel-body event-info">
@@ -121,7 +117,7 @@
                         <button class="btn btn-primary" type="submit">Envoyer </button>
                     </div>
                 </div>
-            {!! Form::close() !!}
+            </form>
 
         </div>
     </div>

@@ -52,6 +52,7 @@ $( function() {
                 dataType: 'json',
                 success: function(data)
                 {
+
                     $select.empty();
                     // array for options
                     var items = [];

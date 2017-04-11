@@ -39,9 +39,9 @@ class MatiereNoteEloquent implements MatiereNoteInterface{
             'content'        => $data['content'],
             'page'           => $data['page'],
             'volume_id'      => $data['volume_id'],
-            'domaine'        => $data['domaine'],
-            'confer_externe' => $data['confer_externe'],
-            'confer_interne' => $data['confer_interne']
+            'domaine'        => isset($data['domaine']) && !empty($data['domaine']) ? $data['domaine'] : null,
+            'confer_externe' => isset($data['confer_externe']) && !empty($data['confer_externe']) ? $data['confer_externe'] : null,
+            'confer_interne' => isset($data['confer_interne']) && !empty($data['confer_interne']) ? $data['confer_interne'] : null,
         ));
 
         if( ! $matiere_note )
@@ -74,6 +74,14 @@ class MatiereNoteEloquent implements MatiereNoteInterface{
         $matiere_note = $this->matiere_note->find($id);
 
         return $matiere_note->delete($id);
+    }
+
+
+    public function getByVolumePage($volume_id,$page)
+    {
+        return $this->matiere_note->where('volume_id','=',$volume_id)
+            ->where('page','=',$page)
+            ->get();
     }
 
 }

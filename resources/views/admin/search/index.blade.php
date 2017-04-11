@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-md-6">
 
-            {{ Form::open(array( 'url' => 'admin/search' )) }}
+            <form action="{{ url('admin/search') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Recherche</label>
                         <div class="col-sm-8">
@@ -17,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-             {{ Form::close() }}
+            </form>
 
         </div>
         <div class="col-md-6">

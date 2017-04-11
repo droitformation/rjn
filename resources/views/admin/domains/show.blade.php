@@ -15,12 +15,8 @@
     <div class="col-md-12">
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::model($domain,array(
-                'method'        => 'PUT',
-                'class'         => 'form-validation form-horizontal',
-                'url'           => array('admin/domain/'.$domain->id)))
-            !!}
+            <form action="{{ url('admin/domain/'.$domain->id) }}" method="post" class="form-validation form-horizontal">
+                <input type="hidden" name="_method" value="PUT">{!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>&Eacute;diter {{ $domain->title }}</h4>
@@ -62,7 +58,7 @@
                     <button class="btn btn-primary" type="submit">Envoyer </button>
                 </div>
             </div>
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 

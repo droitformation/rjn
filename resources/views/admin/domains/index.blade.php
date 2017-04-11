@@ -34,9 +34,10 @@
                                     <td><strong>{{ $domain->title }}</strong></td>
                                     <td><strong>{{ $droit[$domain->droit] }}</strong></td>
                                     <td class="text-right">
-                                        {!! Form::open(array('route' => array('admin.domain.destroy', $domain->id), 'method' => 'delete')) !!}
-                                            <button data-action="{{ $domain->title }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                        {!! Form::close() !!}
+                                        <form action="{{ url('admin/domain/'.$domain->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                            <button data-action="contenu: {{ $domain->title }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

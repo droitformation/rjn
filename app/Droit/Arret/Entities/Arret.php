@@ -14,8 +14,7 @@ class Arret extends Model {
     {
         return $this->belongsToMany('App\Droit\Categorie\Entities\Categorie', 'arret_categories', 'arret_id', 'categorie_id')->withPivot('sorting')->orderBy('sorting', 'asc');
     }
-
-
+    
     public function arret_groupes()
     {
         return $this->belongsToMany('App\Droit\Groupe\Entities\Groupe', 'arret_groupes', 'arret_id', 'groupe_id');

@@ -78,6 +78,22 @@ class NoteController extends Controller {
 	{
         $note = $this->note->create($request->all());
 
+		if($request->ajax()){
+			$notes = $this->note->getByVolumePage($note->volume_id,$note->page);
+			$notes = !$notes->isEmpty() ? $notes->map(function ($note, $key) {
+				return [
+					'id' => $note->id,
+					'content' => $note->content,
+					'domaine' => $note->domaine,
+					'confer_interne' => $note->confer_interne,
+					'confer_externe' => $note->confer_externe,
+					'matiere' => $note->matiere->title
+				];
+			}) : collect([]);
+
+			return ['notes' => $notes];
+		}
+
         return redirect('admin/note/'.$note->id);
 	}
 
@@ -113,10 +129,28 @@ class NoteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id, Request $request)
 	{
-        $matiere_id = $this->note->find($id)->matiere_id;
+		$oldnote    = $this->note->find($id);
+        $matiere_id = $oldnote->matiere_id;
+		
         $this->note->delete($id);
+
+		if($request->ajax()){
+			$notes = $this->note->getByVolumePage($oldnote->volume_id,$oldnote->page);
+			$notes = !$notes->isEmpty() ? $notes->map(function ($note, $key) {
+				return [
+					'id' => $note->id,
+					'content' => $note->content,
+					'domaine' => $note->domaine,
+					'confer_interne' => $note->confer_interne,
+					'confer_externe' => $note->confer_externe,
+					'matiere' => $note->matiere->title
+				];
+			}) : collect([]);
+
+			return ['notes' => $notes];
+		}
 
         return redirect('admin/note/matiere/'.$matiere_id)->with(array('status' => 'success', 'message' => 'Note supprimé' ));
 	}

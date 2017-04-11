@@ -14,13 +14,8 @@
         <div class="col-md-12">
             <div class="panel panel-midnightblue">
 
-                <?php 
-                    //echo '<pre>';
-                    //print_r($disposition);
-                    //echo '</pre>';
-                ?>
-                <!-- form start -->
-                {!! Form::open(array('method' => 'POST','class'  => 'form-validation form-horizontal','url' => array('admin/disposition/addpage'))) !!}
+                <form action="{{ url('admin/disposition/addpage') }}" method="post" class="form-validation form-horizontal">
+                   {!! csrf_field() !!}
 
                 <div class="panel-heading">
                     <h4>Subdivisions de la disposition</h4>
@@ -100,7 +95,7 @@
                         <button class="btn btn-primary" type="submit">Envoyer </button>
                     </div>
                 </div>
-                {!! Form::close() !!}
+               </form>
             </div>
         </div>
     </div>

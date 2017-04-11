@@ -15,8 +15,7 @@
         <div class="panel panel-midnightblue">
 
             <form action="{{ url('admin/code/'.$code->id) }}" method="post" class="form-validation form-horizontal">
-            <input type="hidden" name="_method" value="PUT">
-            {!! csrf_field() !!}
+            <input type="hidden" name="_method" value="PUT">{!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>&Eacute;diter</h4>

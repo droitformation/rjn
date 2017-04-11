@@ -13,8 +13,8 @@
 
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::open(array('method' => 'POST', 'class' => 'form-validation form-horizontal','url' => array('admin/loi') )) !!}
+            <form action="{{ url('admin/loi') }}" method="post" class="form-validation form-horizontal">
+                {!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>Créer loi</h4>
@@ -54,7 +54,7 @@
                     <button class="btn btn-primary" type="submit">Envoyer </button>
                 </div>
             </div>
-            {!! Form::close() !!}
+            </form>
 
         </div>
     </div>

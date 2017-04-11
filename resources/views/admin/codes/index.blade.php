@@ -44,9 +44,10 @@
                                         @endif
                                     </td>
                                     <td class="text-right">
-                                        {!! Form::open(array('route' => array('admin.code.destroy', $code->id), 'method' => 'delete')) !!}
-                                            <button data-action="{{ $code->code }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                        {!! Form::close() !!}
+                                        <form action="{{ url('admin/code/'.$code->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                            <button data-action="code: {{ $code->code  }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

@@ -34,9 +34,10 @@
                                     <td><strong>{{ $categorie->title }}</strong></td>
                                     <td>{{ $domains[$categorie->domain_id] }}</td>
                                     <td class="text-right">
-                                        {!! Form::open(array('route' => array('admin.categorie.destroy', $categorie->id), 'method' => 'delete')) !!}
-                                        <button data-action="{{ $categorie->title }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                        {!! Form::close() !!}
+                                        <form action="{{ url('admin/categorie/'.$categorie->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                            <button data-action="categorie: {{ $categorie->title }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

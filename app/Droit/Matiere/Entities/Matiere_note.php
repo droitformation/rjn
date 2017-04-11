@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matiere_note extends Model {
 
-	protected $fillable = ['matiere_id','content','page','domaine','confer_externe','confer_interne'];
+	protected $fillable = ['matiere_id','volume_id','content','page','domaine','confer_externe','confer_interne'];
     public $timestamps  = false;
 
     public function getAnchorAttribute($value)

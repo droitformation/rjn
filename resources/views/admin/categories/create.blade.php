@@ -13,12 +13,8 @@
     <div class="col-md-12">
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::open(array(
-                'method' => 'POST',
-                'class'  => 'form-validation form-horizontal',
-                'url'    => array('admin/categorie')))
-            !!}
+            <form action="{{ url('admin/categorie') }}" method="post" class="form-validation form-horizontal">
+                {!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>Ajouter une catégorie</h4>
@@ -54,7 +50,7 @@
                 </div>
             </div>
 
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 

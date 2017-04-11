@@ -34,9 +34,10 @@
                                     <td><strong>{{ $groupe->titre }}</strong></td>
                                     <td>{{ $rjn[$groupe->volume_id] }}</td>
                                     <td class="text-right">
-                                        {!! Form::open(array('route' => array('admin.groupe.destroy', $groupe->id), 'method' => 'delete')) !!}
-                                        <button data-action="{{ $groupe->titre }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                        {!! Form::close() !!}
+                                        <form action="{{ url('admin/groupe/'.$groupe->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                            <button data-action="contenu: {{ $groupe->titre }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

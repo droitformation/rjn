@@ -13,12 +13,8 @@
     <div class="col-md-12">
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::open(array(
-                'method' => 'POST',
-                'class'  => 'form-validation form-horizontal',
-                'url'    => array('admin/critique')))
-            !!}
+            <form action="{{ url('admin/critique') }}" method="post" class="form-validation form-horizontal">
+                {!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>Ajouter une critique</h4>
@@ -66,7 +62,7 @@
                 </div>
             </div>
 
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 

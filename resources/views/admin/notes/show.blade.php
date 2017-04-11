@@ -16,7 +16,8 @@
         <div class="panel panel-midnightblue">
 
             <!-- form start -->
-            {!! Form::model($matiere,array('method' => 'PUT','class'  => 'form-validation form-horizontal','url' => array('admin/matiere/'.$note->id))) !!}
+            <form action="{{ url('admin/note/matiere/'.$note->id) }}" method="post" class="form-validation form-horizontal">
+                <input type="hidden" name="_method" value="PUT">{!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>&Eacute;diter</h4>
@@ -79,7 +80,7 @@
                     <button class="btn btn-primary" type="submit">Envoyer </button>
                 </div>
             </div>
-            {!! Form::close() !!}
+           </form>
         </div>
     </div>
 

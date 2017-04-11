@@ -8,6 +8,7 @@ use App\Droit\Domain\Repo\DomainInterface;
 use App\Droit\Categorie\Repo\CategorieInterface;
 use App\Droit\Rjn\Repo\RjnInterface;
 use App\Droit\Loi\Repo\LoiInterface;
+use App\Droit\Matiere\Repo\MatiereInterface;
 
 class AdminComposer
 {
@@ -17,13 +18,16 @@ class AdminComposer
     protected $loi;
     protected $helper;
     protected $alpha;
+    protected $matiere;
 
-    public function __construct(DomainInterface $domain, CategorieInterface $categorie, RjnInterface $rjn, LoiInterface $loi)
+    public function __construct(DomainInterface $domain, CategorieInterface $categorie, RjnInterface $rjn, LoiInterface $loi, MatiereInterface $matiere)
     {
         $this->categorie = $categorie;
         $this->domain    = $domain;
         $this->rjn       = $rjn;
         $this->loi       = $loi;
+        $this->matiere   = $matiere;
+
         $this->helper  = new \App\Droit\Helper\Helper;
     }
 
@@ -36,6 +40,25 @@ class AdminComposer
     public function compose(View $view)
     {
         $droit = [ 1 => 'Droit fédéral',  2 => 'Droit cantonal', 3 => 'Droit international'];
+
+        $volumes = $this->rjn->getAll();
+        $volumes = $volumes->map(function ($item, $key) {
+            return [
+                'id' => $item->id,
+                'year' => $item->volume
+            ];
+        });
+
+        $matieres = $this->matiere->getAll();
+        $matieres = $matieres->map(function ($matiere, $key) {
+            return [
+                'value' => $matiere->id,
+                'label' => $matiere->title,
+            ];
+        });
+
+        $view->with('list_matieres', $matieres);
+        $view->with('list_volumes', $volumes);
 
         $view->with('droit', $droit);
     }

@@ -51,7 +51,7 @@ class RjnComposer
 
         $view->with('rjn', $this->rjn->getAll());
         $view->with('volumes', $this->rjn->getAll());
-        $view->with('search_lois',     $lois);
+        $view->with('search_lois',$lois);
 
         $alpha = ['A','B','C','D','E','F','G','H','I','J','K', 'L','M','N','O','P','Q','R','S','T','U','V','W','X ','Y','Z'];
         $droit = [ 1 => 'Droit fédéral',  2 => 'Droit cantonal', 3 => 'Droit international'];

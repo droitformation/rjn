@@ -31,15 +31,15 @@
 
                         </div>
                         <div class="col-md-4 text-right">
-                            {{ Form::open(array('url' => array('admin/file/addFolder'))) }}
-                            <div class="input-group">
-                                <input type="text" name="folder" class="form-control">
-                                <input type="hidden" id="addFolderForm" name="path">
-                                <span class="input-group-btn">
-                                   <button class="btn btn-sky" type="submit"><i class="fa fa-folder"></i>&nbsp; Ajouter un dossier</button>
-                                </span>
-                            </div><!-- /input-group -->
-                            {{ Form::close() }}
+                            <form action="{{ url('admin/file/addFolder') }}" method="POST">{!! csrf_field() !!}
+                                <div class="input-group">
+                                    <input type="text" name="folder" class="form-control">
+                                    <input type="hidden" id="addFolderForm" name="path">
+                                    <span class="input-group-btn">
+                                       <button class="btn btn-sky" type="submit"><i class="fa fa-folder"></i>&nbsp; Ajouter un dossier</button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </form>
                         </div>
                     </div>
 

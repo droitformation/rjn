@@ -44,9 +44,10 @@
                                 <td>{{ $rjn[$note->volume_id] }}</td>
                                 <td>{{ $note->page }}</td>
                                 <td class="text-right">
-                                    {!! Form::open(array('route' => array('admin.note.destroy', $note->id), 'method' => 'delete')) !!}
-                                    <button data-action="contenu: {{ $note->titre }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                    {!! Form::close() !!}
+                                    <form action="{{ url('admin/note/'.$note->id) }}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                        <button data-action="contenu: {{ $note->titre}}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                    </form>
                                 </td>
                             </tr>
 

@@ -37,9 +37,10 @@
                                         <td>{{ $chronique->pub_date->formatLocalized('%d %B %Y') }}</td>
                                         <td>{{ $rjn[$chronique->volume_id] }}</td>
                                         <td>
-                                            {!! Form::open(array('route' => array('admin.chronique.destroy', $chronique->id), 'method' => 'delete')) !!}
-                                            <button data-action="arrêt {{ $chronique->designation }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                            {!! Form::close() !!}
+                                            <form action="{{ url('admin/chronique/'.$chronique->id) }}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                                <button data-action="chronique: {{ $chronique->designation  }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

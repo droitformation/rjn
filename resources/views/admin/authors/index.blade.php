@@ -34,9 +34,10 @@
                                     <td><strong>{{ $author->first_name }} {{ $author->last_name }}</strong></td>
                                     <td>{{ $author->occupation }}</td>
                                     <td class="text-right">
-                                        {!! Form::open(array('route' => array('admin.author.destroy', $author->id), 'method' => 'delete')) !!}
-                                        <button data-action="{{ $author->first_name }} {{ $author->last_name }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                        {!! Form::close() !!}
+                                        <form action="{{ url('admin/author/'.$author->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                            <button data-action="author: {{  $author->first_name }} {{ $author->last_name }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

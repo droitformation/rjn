@@ -22,6 +22,13 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
 	<![endif]-->
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+                'url'   => url('/'),
+        ]); ?>
+    </script>
+
     <base href="/">
 
 </head>
@@ -116,6 +123,7 @@
     <script type="text/javascript" src="<?php echo asset('admin_assets/js/datatables.js');?>"></script>
     <script type="text/javascript" src="<?php echo asset('admin_assets/js/application.js');?>"></script>
     <script type='text/javascript' src="<?php echo asset('admin_assets/plugins/bootbox/bootbox.min.js');?>"></script>
+    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="<?php echo asset('admin_assets/js/admin.js');?>"></script>
 <!--
     <script type="text/jsx" src="<?php /*echo asset('admin_assets/js/select.js');*/?>"></script>-->

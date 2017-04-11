@@ -13,8 +13,8 @@
     <div class="col-md-12">
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::open(array('method' => 'POST','class'  => 'form-validation form-horizontal','url'    => array('admin/note'))) !!}
+            <form action="{{ url('admin/note') }}" method="post" class="form-validation form-horizontal">
+                {!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>Ajouter un contenu</h4>
@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 

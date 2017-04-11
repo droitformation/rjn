@@ -10,6 +10,7 @@ use App\Droit\Domain\Repo\DomainInterface;
 use App\Droit\Arret\Repo\ArretInterface;
 use App\Droit\Critique\Repo\CritiqueInterface;
 use App\Droit\Categorie\Repo\CategorieInterface;
+use App\Droit\Matiere\Repo\MatiereNoteInterface;
 use App\Droit\Groupe\Repo\GroupeInterface;
 use App\Droit\Rjn\Repo\RjnInterface;
 
@@ -22,13 +23,22 @@ class ArretController extends Controller {
     protected $rjn;
     protected $groupe;
     protected $dropdown;
+	protected $matiere_note;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(DomainInterface $domain, ArretInterface $arret, CategorieInterface $categorie,GroupeInterface $groupe, CritiqueInterface $critique, RjnInterface $rjn)
+    public function __construct(
+		DomainInterface $domain,
+		ArretInterface $arret,
+		CategorieInterface $categorie,
+		GroupeInterface $groupe,
+		CritiqueInterface $critique,
+		RjnInterface $rjn,
+		MatiereNoteInterface $matiere_note
+	)
     {
         $this->arret     = $arret;
         $this->groupe    = $groupe;
@@ -36,6 +46,7 @@ class ArretController extends Controller {
         $this->rjn       = $rjn;
         $this->categorie = $categorie;
         $this->domain    = $domain;
+		$this->matiere_note = $matiere_note;
 
         $volumes  = $this->rjn->getAll()->pluck('volume','id')->all();
         $domains  = $this->domain->getAll(2)->pluck('title','id')->all();
@@ -79,8 +90,6 @@ class ArretController extends Controller {
 	public function store(CreateArret $request)
 	{
         $arret = $this->arret->create($request->all());
-		
-		
 
         return redirect('admin/arret/'.$arret->id);
 	}
@@ -97,7 +106,19 @@ class ArretController extends Controller {
         $critique = $this->critique->getByType('arret',$id);
         $groupes  = $this->groupe->getAll();
 
-        return view('admin.arrets.show')->with(array( 'arret' => $arret, 'critique' => $critique ,'groupes' => $groupes));
+		$notes = $this->matiere_note->getByVolumePage($arret->volume_id,$arret->page);
+		$notes = !$notes->isEmpty() ? $notes->map(function ($note, $key) {
+			return [
+				'id' => $note->id,
+				'content' => $note->content,
+				'domaine' => $note->domaine,
+				'confer_interne' => $note->confer_interne,
+				'confer_externe' => $note->confer_externe,
+				'matiere' => $note->matiere->title
+			];
+		}) : collect([]);
+
+        return view('admin.arrets.show')->with(array( 'arret' => $arret, 'critique' => $critique ,'groupes' => $groupes, 'notes' => $notes));
 	}
 
 	/**

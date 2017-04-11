@@ -42,9 +42,10 @@
                                         <td>{{{ $item->type or '' }}}</td>
                                         <td>{{ $positions[$item->position] }}</td>
                                         <td class="text-right">
-                                            {{ Form::open(array('route' => array('admin.contenu.destroy', $item->id), 'method' => 'delete')) }}
+                                            <form action="{{ url('admin/contenu/'.$item->id) }}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
                                                 <button data-action="contenu: {{{ $item->titre }}}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                            {{ Form::close() }}
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

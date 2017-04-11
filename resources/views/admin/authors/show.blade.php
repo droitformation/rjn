@@ -14,12 +14,8 @@
     <div class="col-md-12">
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::model($author,array(
-                'method' => 'PUT',
-                'class'  => 'form-validation form-horizontal',
-                'url'    => array('admin/author/'.$author->id)))
-            !!}
+            <form action="{{ url('admin/author/'.$author->id) }}" method="post" class="form-validation form-horizontal">
+                <input type="hidden" name="_method" value="PUT">{!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>&Eacute;diter {{ $author->name }}</h4>
@@ -55,7 +51,7 @@
                     <button class="btn btn-primary" type="submit">Envoyer </button>
                 </div>
             </div>
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
 

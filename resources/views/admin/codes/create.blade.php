@@ -15,6 +15,9 @@
             <!-- form start -->
             {!! Form::open(['method' => 'POST', 'class' => 'form-validation form-horizontal','url' => ['admin/code']]) !!}
 
+            <form action="{{ url('admin/code') }}" method="post" class="form-validation form-horizontal">
+               {!! csrf_field() !!}
+
             <div class="panel-heading">
                 <h4>Ajouter un code</h4>
             </div>
@@ -42,9 +45,10 @@
                 </div>
             </div>
 
-            {!! Form::close() !!}
+            </form>
         </div>
     </div>
+
 
 </div>
 <!-- end row -->

@@ -40,9 +40,10 @@
                                         <td><a class="btn btn-default btn-sm" href="{{ url('admin/disposition/loi/'.$loi->id) }}">Voir les contenus</a></td>
                                         <td>{{ $droit[$loi->droit] }}</td>
                                         <td>
-                                            {!! Form::open(array('route' => array('admin.loi.destroy', $loi->id), 'method' => 'delete')) !!}
-                                            <button data-action="arrêt {{ $loi->name }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                            {!! Form::close() !!}
+                                            <form action="{{ url('admin/loi/'.$loi->id) }}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                                <button data-action="loi: {{ $loi->name }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

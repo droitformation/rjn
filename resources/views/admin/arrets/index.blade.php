@@ -37,9 +37,10 @@
                                         <td>{{ $arret->pub_date->formatLocalized('%d %B %Y') }}</td>
                                         <td>{{ $rjn[$arret->volume_id] }}</td>
                                         <td>
-                                            {!! Form::open(array('route' => array('admin.arret.destroy', $arret->id), 'method' => 'delete')) !!}
-                                            <button data-action="arrêt {{ $arret->designation }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                            {!! Form::close() !!}
+                                            <form action="{{ url('admin/arret/'.$arret->id) }}" method="POST">
+                                                <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                                <button data-action="arrêt: {{ $arret->designation }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

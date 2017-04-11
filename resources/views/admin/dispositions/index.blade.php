@@ -39,9 +39,10 @@
                                 <td>{!! $disposition->cote or '' !!}</td>
                                 <td><a class="btn btn-default btn-sm" href="{{ url('admin/disposition/page/'.$disposition->id) }}">Voir les subdivisions</a></td>
                                 <td class="text-right">
-                                    {!! Form::open(array('route' => array('admin.disposition.destroy', $disposition->id), 'method' => 'delete')) !!}
-                                    <button data-action="contenu: {{ $disposition->content }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
-                                    {!! Form::close() !!}
+                                    <form action="{{ url('admin/disposition/'.$disposition->id) }}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">{!! csrf_field() !!}
+                                        <button data-action="contenu: {{ $disposition->content  }}" class="btn btn-danger btn-sm deleteAction">Supprimer</button>
+                                    </form>
                                 </td>
                             </tr>
 

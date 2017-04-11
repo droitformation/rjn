@@ -7,9 +7,9 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = require('jquery');
+//window.$ = window.jQuery = require('jquery');
 
-require('bootstrap-sass');
+//require('bootstrap-sass');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -31,6 +31,10 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
+
+
+import vSelect from 'vue-select';
+Vue.component('vSelect',vSelect)
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -129,5 +129,5 @@ class MatiereEloquent implements MatiereInterface{
 
         return $matiere->delete();
     }
-
+    
 }

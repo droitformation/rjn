@@ -51,7 +51,7 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'unix_socket' => env('DB_SOCKET', ''),
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
         ],
 

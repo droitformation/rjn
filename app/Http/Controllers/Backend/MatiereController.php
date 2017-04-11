@@ -62,6 +62,18 @@ class MatiereController extends Controller {
 	{
         $matiere = $this->matiere->create($request->all());
 
+		if($request->ajax()){
+			$matieres = $this->matiere->getAll()->sortBy('title');
+			$matieres = $matieres->map(function ($matiere, $key) {
+				return [
+					'label' => $matiere->title,
+					'value' => $matiere->id,
+				];
+			});
+
+			return ['matieres' => $matieres];
+		}
+
         return redirect('admin/matiere/'.$matiere->id);
 	}
 

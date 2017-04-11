@@ -13,8 +13,8 @@
 
         <div class="panel panel-midnightblue">
 
-            <!-- form start -->
-            {!! Form::open(array('method' => 'POST', 'class' => 'form-validation form-horizontal','url' => array('admin/chronique') )) !!}
+            <form action="{{ url('admin/chronique') }}" method="post" class="form-validation form-horizontal">
+               {!! csrf_field() !!}
 
             <div class="panel-heading">
                 <h4>Créer chronique</h4>
@@ -110,7 +110,7 @@
                     <button class="btn btn-primary" type="submit">Envoyer </button>
                 </div>
             </div>
-            {!! Form::close() !!}
+            </form>
 
         </div>
     </div>
