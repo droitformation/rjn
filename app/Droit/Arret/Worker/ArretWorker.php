@@ -25,5 +25,4 @@ class ArretWorker{
 
         return (!empty($sort) ? $sort : []);
     }
-
 }

@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('matiere', require('./components/Matiere.vue'));
+Vue.component('loi', require('./components/Loi.vue'));
 
 const app = new Vue({
     el: '#app'

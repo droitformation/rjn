@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Backend;
 
+use App\Droit\Disposition\Entities\Disposition;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -13,6 +14,7 @@ use App\Droit\Categorie\Repo\CategorieInterface;
 use App\Droit\Matiere\Repo\MatiereNoteInterface;
 use App\Droit\Groupe\Repo\GroupeInterface;
 use App\Droit\Rjn\Repo\RjnInterface;
+use App\Droit\Disposition\Repo\DispositionInterface;
 
 class ArretController extends Controller {
 
@@ -24,6 +26,7 @@ class ArretController extends Controller {
     protected $groupe;
     protected $dropdown;
 	protected $matiere_note;
+	protected $disposition;
 
     /**
      * Create a new controller instance.
@@ -37,7 +40,8 @@ class ArretController extends Controller {
 		GroupeInterface $groupe,
 		CritiqueInterface $critique,
 		RjnInterface $rjn,
-		MatiereNoteInterface $matiere_note
+		MatiereNoteInterface $matiere_note,
+		DispositionInterface $disposition
 	)
     {
         $this->arret     = $arret;
@@ -47,6 +51,7 @@ class ArretController extends Controller {
         $this->categorie = $categorie;
         $this->domain    = $domain;
 		$this->matiere_note = $matiere_note;
+		$this->disposition = $disposition;
 
         $volumes  = $this->rjn->getAll()->pluck('volume','id')->all();
         $domains  = $this->domain->getAll(2)->pluck('title','id')->all();
@@ -106,6 +111,8 @@ class ArretController extends Controller {
         $critique = $this->critique->getByType('arret',$id);
         $groupes  = $this->groupe->getAll();
 
+		$dispositions = $this->disposition->getVolumePage($arret->volume_id,$arret->page);
+
 		$notes = $this->matiere_note->getByVolumePage($arret->volume_id,$arret->page);
 		$notes = !$notes->isEmpty() ? $notes->map(function ($note, $key) {
 			return [
@@ -118,7 +125,21 @@ class ArretController extends Controller {
 			];
 		}) : collect([]);
 
-        return view('admin.arrets.show')->with(array( 'arret' => $arret, 'critique' => $critique ,'groupes' => $groupes, 'notes' => $notes));
+		$dispositions = !$dispositions->isEmpty() ? $dispositions->map(function ($disposition, $key) {
+			return $disposition->disposition_pages->map(function ($dis, $key) use ($disposition) {
+				return [
+					'id'      => $disposition->id,
+					'loi'     => $disposition->loi->title,
+					'loi_id'  => $disposition->loi_id,
+					'article' => 'Art. '.$disposition->cote_number,
+					'alinea'  => !empty($dis->alinea) ? 'al. '.$dis->alinea : "",
+					'chiffre' => !empty($dis->chiffre) ? 'ch. '.$dis->chiffre : "",
+					'lettre'  => !empty($dis->lettre) ? 'let. '.$dis->lettre : "",
+				];
+			});
+		})->flatten(1) : collect([]);
+
+        return view('admin.arrets.show')->with(['arret' => $arret, 'critique' => $critique ,'groupes' => $groupes, 'notes' => $notes, 'dispositions' => $dispositions]);
 	}
 
 	/**

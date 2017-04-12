@@ -57,9 +57,17 @@ class AdminComposer
             ];
         });
 
+        $lois = $this->loi->getAll();
+        $lois = $lois->map(function ($loi, $key) {
+            return [
+                'value' => $loi->id,
+                'label' => $loi->title,
+            ];
+        });
+     
         $view->with('list_matieres', $matieres);
         $view->with('list_volumes', $volumes);
-
+        $view->with('list_lois', $lois);
         $view->with('droit', $droit);
     }
 }

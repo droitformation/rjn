@@ -17,6 +17,15 @@ class DispositionEloquent implements DispositionInterface{
         return $this->disposition->with(['disposition_pages'])->get();
     }
 
+    public function getVolumePage($volume,$page){
+
+        return $this->disposition->with(['disposition_pages'])->whereHas('disposition_pages', function($query) use ($volume,$page) {
+
+            $query->where('volume_id','=',$volume)->where('page','=',$page);
+
+        })->groupBy('id')->get();
+    }
+
     public function search($id,$article = null){
 
         $loi = $this->disposition->where('loi_id','=',$id);

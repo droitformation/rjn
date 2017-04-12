@@ -7,6 +7,7 @@ interface DispositionInterface {
     public function findByLoi($id);
     public function search($id,$article = null);
     public function searchByArticle($article);
+    public function getVolumePage($volume,$page);
     public function create(array $data);
     public function update(array $data);
     public function delete($id);

@@ -7,7 +7,7 @@
     </div>
 </div>
 <!-- start row -->
-<div class="row">
+<div class="row"  id="app">
 
 @if ( !empty($arret) )
 
@@ -80,6 +80,18 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="message" class="col-sm-3 control-label">Références termes</label>
+                    <div class="col-sm-9">
+                        <loi
+                            :lois="{{ $list_lois }}"
+                            :volumes="{{ $list_volumes }}"
+                            :dispositions="{{ $dispositions }}"
+                            :page="{{ $arret->page }}"
+                            :volume_id="{{ $arret->volume_id }}"></loi>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="message" class="col-sm-3 control-label">Somaire</label>
                     <div class="col-sm-9">
                         {!! Form::textarea('sommaire', $arret->sommaire , array('class' => 'form-control', 'cols' => '50' , 'rows' => '4' )) !!}
@@ -132,7 +144,7 @@
                 <div class="panel-heading">
                     <h4>Ajouter les matières</h4>
                 </div>
-                <div class="panel-body" id="app">
+                <div class="panel-body">
                     <matiere :matieres="{{ $list_matieres }}"
                              :notes="{{ $notes }}"
                              :volumes="{{ $list_volumes }}"

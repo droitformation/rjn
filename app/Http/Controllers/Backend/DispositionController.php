@@ -82,6 +82,46 @@ class DispositionController extends Controller {
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function storeAjax(CreateDisposition $request)
+    {
+
+        // Prepare
+        $data = $request->all();
+
+        $data_disposition = $request->only(['loi_id','volume_id','page','article']);
+        $disposition = $this->disposition->create([
+            'loi_id'   => $data_disposition['loi_id'],
+            'volume_id'=> $data_disposition['volume_id'],
+            'page'     => $data_disposition['page'],
+            'cote'     => $data_disposition['article'],
+        ]);
+
+        $loi = $this->disposition->create($data);
+
+        $dispositions = $this->disposition->getVolumePage($request->input('volume_id'),$request->input('page'));
+        $dispositions = !$dispositions->isEmpty() ? $dispositions->map(function ($disposition, $key) {
+            return $disposition->disposition_pages->map(function ($dis, $key) use ($disposition) {
+                return [
+                    'id'      => $disposition->id,
+                    'loi'     => $disposition->loi->title,
+                    'loi_id'  => $disposition->loi_id,
+                    'article' => 'Art. '.$disposition->cote_number,
+                    'alinea'  => !empty($dis->alinea) ? 'al. '.$dis->alinea : "",
+                    'chiffre' => !empty($dis->chiffre) ? 'ch. '.$dis->chiffre : "",
+                    'lettre'  => !empty($dis->lettre) ? 'let. '.$dis->lettre : "",
+                ];
+            });
+        })->flatten(1) : collect([]);
+
+        return ['dispositions' => $dispositions];
+
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -155,10 +195,30 @@ class DispositionController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        $loi_id = $this->disposition->find($id)->loi_id;
+        $oldDis = $this->disposition->find($id);
+        $loi_id = $oldDis->loi_id;
         $this->disposition->delete($id);
+
+        if($request->ajax()){
+            $dispositions = $this->disposition->getVolumePage($oldDis->volume_id,$oldDis->page);
+            $dispositions = !$dispositions->isEmpty() ? $dispositions->map(function ($disposition, $key) {
+                return $disposition->disposition_pages->map(function ($dis, $key) use ($disposition) {
+                    return [
+                        'id'      => $disposition->id,
+                        'loi'     => $disposition->loi->title,
+                        'loi_id'  => $disposition->loi_id,
+                        'article' => 'Art. '.$disposition->cote_number,
+                        'alinea'  => !empty($dis->alinea) ? 'al. '.$dis->alinea : "",
+                        'chiffre' => !empty($dis->chiffre) ? 'ch. '.$dis->chiffre : "",
+                        'lettre'  => !empty($dis->lettre) ? 'let. '.$dis->lettre : "",
+                    ];
+                });
+            })->flatten(1) : collect([]);
+
+            return ['dispositions' => $dispositions];
+        }
 
         return redirect('admin/disposition/loi/'.$loi_id)->with(array('status' => 'success', 'message' => 'Disposition supprimé' ));
     }

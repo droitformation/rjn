@@ -54,6 +54,18 @@ class LoiController extends Controller {
 	{
         $loi = $this->loi->create($request->all());
 
+		if($request->ajax()){
+			$lois = $this->loi->getAll();
+			$lois = $lois->map(function ($loi, $key) {
+				return [
+					'value' => $loi->id,
+					'label' => $loi->title,
+				];
+			});
+
+			return ['lois' => $lois];
+		}
+
         return redirect('admin/loi/'.$loi->id);
 	}
 
