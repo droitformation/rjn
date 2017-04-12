@@ -12,13 +12,47 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Droit\User\Entities\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'name'     => $faker->name,
+        'email'    => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'role'     => 'abonne',
+        'numero'   => $faker->randomDigit
+    ];
+});
+
+$factory->define(App\Droit\Code\Entities\Code::class, function (Faker\Generator $faker) {
+
+    return [
+        'code'      => $faker->randomLetter,
+        'valid_at'  => \Carbon\Carbon::tomorrow()->toDateString(),
+        'used'      => 1,
+        'user_id'   => 1,
+    ];
+});
+
+
+$factory->define(App\Droit\Arret\Entities\Arret::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'pid'         => 1,
+        'designation' => $faker->sentence(10),
+        'volume_id'   => 6,
+        'groupe'      => null,
+        'domain_id'   => 1,
+        'page'        => $faker->randomNumber(3),
+        'pub_date'    => $faker->dateTime,
+        'cotes'       => 'Art. 123 al. 45',
+        'sommaire'    => $faker->text(300),
+        'portee'      => $faker->text(300),
+        'faits'       => null,
+        'considerant' => null,
+        'droit'       => null,
+        'conclusion'  => null,
+        'note'        => null,
     ];
 });

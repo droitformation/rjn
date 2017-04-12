@@ -88,19 +88,20 @@ class DispositionController extends Controller {
      */
     public function storeAjax(CreateDisposition $request)
     {
-
-        // Prepare
-        $data = $request->all();
-
         $data_disposition = $request->only(['loi_id','volume_id','page','article']);
+        $data_page = $request->only(['volume_id','page','alinea','chiffre','lettre']);
+
         $disposition = $this->disposition->create([
-            'loi_id'   => $data_disposition['loi_id'],
-            'volume_id'=> $data_disposition['volume_id'],
-            'page'     => $data_disposition['page'],
-            'cote'     => $data_disposition['article'],
+            'loi_id'    => $data_disposition['loi_id'],
+            'content'   => "",
+            'volume_id' => $data_disposition['volume_id'],
+            'page'      => $data_disposition['page'],
+            'cote'      => $data_disposition['article'],
         ]);
 
-        $loi = $this->disposition->create($data);
+        $page = new \App\Droit\Disposition\Entities\Disposition_page($data_page);
+
+        $disposition->disposition_pages()->save($page);
 
         $dispositions = $this->disposition->getVolumePage($request->input('volume_id'),$request->input('page'));
         $dispositions = !$dispositions->isEmpty() ? $dispositions->map(function ($disposition, $key) {
@@ -118,7 +119,6 @@ class DispositionController extends Controller {
         })->flatten(1) : collect([]);
 
         return ['dispositions' => $dispositions];
-
     }
 
     /**
@@ -200,7 +200,7 @@ class DispositionController extends Controller {
         $oldDis = $this->disposition->find($id);
         $loi_id = $oldDis->loi_id;
         $this->disposition->delete($id);
-
+        
         if($request->ajax()){
             $dispositions = $this->disposition->getVolumePage($oldDis->volume_id,$oldDis->page);
             $dispositions = !$dispositions->isEmpty() ? $dispositions->map(function ($disposition, $key) {

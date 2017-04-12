@@ -2,23 +2,24 @@
     <div>
 
         <ul class="dispositions">
-            <li v-for="disposition in listDispositions">
+            <li v-if="!loading" v-for="disposition in listDispositions">
                 <div class="row">
                     <div class="col-md-10">
-                        {{ disposition.article }} {{ disposition.aliena }} {{ disposition.chiffre }} {{ disposition.lettre }} {{ disposition.loi }}
+                        {{ disposition.article }} {{ disposition.alinea }} {{ disposition.chiffre }} {{ disposition.lettre }} {{ disposition.loi }}
                     </div>
                     <div class="col-md-2 text-right">
                         <button type="button" @click="removeDisposition(disposition.id)" class="btn btn-danger btn-xs">x</button>
                     </div>
                 </div>
             </li>
+            <li v-if="loading"><i class="fa fa-spinner"></i></li>
         </ul>
 
         <div class="terms">
             <div class="row">
                 <div class="col-md-8 dropdown-vue">
                     <label class="control-label">Loi</label>
-                    <v-select ref="vselect" :label="value" :v-model="newDisposition.loi_id" :options="listLois" :onChange="what"></v-select>
+                    <v-select :label="value" v-model="selected" :options="listLois" :onChange="what"></v-select>
                 </div>
                 <div class="col-md-4">
                     <p class="margUp"><a @click="showAddLoi" class="text-info addBtn">Pas dans la liste?<br/> Ajouter une loi</a></p>
@@ -39,7 +40,7 @@
                     <div class="input-group">
                         <input v-model="newLoi.name" type="text" value="" placeholder="Nom" class="form-control">
                         <span class="input-group-btn">
-                            <button class="btn btn-success" @click="addNewLoi" type="button">créer</button>
+                            <button class="btn btn-success" @click.prevent="addNewLoi" type="button">créer</button>
                         </span>
                     </div><!-- /input-group -->
                 </div>
@@ -63,7 +64,7 @@
                     <input class="form-control" v-model="newDisposition.lettre" name="lettre" type="text" placeholder="Lettre">
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-info" @click="addNewDisposition" type="button">Ajouter</button>
+                    <button class="btn btn-info" @click.prevent="addNewDisposition" type="button">Ajouter</button>
                 </div>
             </div>
 
@@ -101,6 +102,7 @@
         },
         data(){
             return{
+                loading:false,
                 newLoi:{
                     name:"",
                     sigle:"",
@@ -109,7 +111,7 @@
                 newDisposition:{
                     volume_id: this.volume_id,
                     page: this.page,
-                    loi_id:"",
+                    loi_id:null,
                     article:"",
                     alinea:"",
                     chiffre:"",
@@ -118,6 +120,7 @@
                 listLois: [],
                 listDispositions: [],
                 addLoi: false,
+                selected: null,
             }
         },
         mounted: function () {
@@ -130,7 +133,7 @@
             },
             what: function(val){
                 this.newDisposition.loi_id = val.value;
-                console.log(JSON.stringify(this.newLoi));
+                this.selected = val;
             },
             showAddLoi: function(){
                 this.addLoi = true;
@@ -152,21 +155,36 @@
             },
             addNewDisposition: function(){
                 var self = this;
+                this.loading = true;
+                console.log(JSON.stringify(self.newDisposition));
+                axios.post('/admin/disposition/storeAjax', self.newDisposition).then(function (response) {
 
-                    console.log(JSON.stringify(self.newDisposition));
-            //   axios.post('/admin/disposition', self.newDisposition).then(function (response) {
-                    // self.updateDispositions(response.data.dispositions);
-                //})
-                //.catch(function (error) { console.log(error); });
+                     self.newDisposition = {
+                        volume_id: self.volume_id,
+                        page: self.page,
+                        loi_id:null,
+                        article:"",
+                        alinea:"",
+                        chiffre:"",
+                        lettre:""
+                     };
+
+                     console.log(self.selected);
+                     self.selected = null;
+                     self.updateDispositions(response.data.dispositions);
+                     self.loading = false;
+                })
+                .catch(function (error) { console.log(error); });
             },
             updateDispositions: function(dispositions){
                 this.listDispositions = dispositions
             },
             removeDisposition: function(id){
                 var self = this;
-
+                this.loading = true;
                 axios.post('/admin/disposition/' + id, { '_method' : 'DELETE' }).then(function (response) {
                      self.updateDispositions(response.data.dispositions);
+                     self.loading = false;
                 })
                 .catch(function (error) { console.log(error); });
             },

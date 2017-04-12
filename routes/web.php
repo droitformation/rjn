@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admini']], function(
     Route::get('disposition/loi/{id}', 'Backend\DispositionController@loi');
     Route::get('disposition/page/{id}', 'Backend\DispositionController@page');
     Route::post('disposition/addpage', 'Backend\DispositionController@addpage');
+    Route::post('disposition/storeAjax', 'Backend\DispositionController@storeAjax');
     Route::resource('disposition', 'Backend\DispositionController');
     Route::resource('loi', 'Backend\LoiController');
     Route::get('lists/{id}', 'Backend\CategorieController@lists');

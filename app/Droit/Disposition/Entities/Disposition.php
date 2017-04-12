@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Disposition extends Model {
 
-	protected $fillable = ['loi_id','cote','page','content','subdivision'];
+	protected $fillable = ['loi_id','cote','page','content','subdivision','volume_id'];
     public $timestamps  = false;
 
     public function getCoteNumberAttribute()

@@ -71,6 +71,13 @@ $( function() {
         }
     }
 
+    $('form input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     // By default hide the selects theme ans subtheme
     $("body").on("change", "#domain", function(){
 

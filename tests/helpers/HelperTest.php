@@ -1,5 +1,9 @@
 <?php
 
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 use App\Droit\Doctrine\Entities\Doctrine as Doctrine;
 
 class HelperTest extends TestCase {
@@ -11,7 +15,7 @@ class HelperTest extends TestCase {
     {
         parent::setUp();
 
-        $this->helper = new \App\Droit\Helper\Helper;
+       /* $this->helper = new \App\Droit\Helper\Helper;
 
         League\FactoryMuffin\Facade::define('Doctrine', array(
             'domain_id'  => '1',          // Set the foo attribute to a random word
@@ -20,7 +24,7 @@ class HelperTest extends TestCase {
 
         $domain = \App::make('App\Droit\Domain\Repo\DomainInterface');
 
-        $this->domains = $domain->getAll(1)->lists('id')->all();
+        $this->domains = $domain->getAll(1)->lists('id')->all();*/
 
     }
 

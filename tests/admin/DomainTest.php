@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class DomainTest extends TestCase {
-
-    use WithoutMiddleware;
-
+    
     protected $mock;
 
     public function setUp()

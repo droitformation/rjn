@@ -1,5 +1,10 @@
 <?php
 
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class MiddlewareTest extends TestCase {
 
 	public function testNotLoggued()

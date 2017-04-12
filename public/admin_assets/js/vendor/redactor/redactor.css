@@ -55,7 +55,7 @@
 }
 .redactor-toolbar,
 .redactor-dropdown {
-  z-index: 1000 !important;
+  z-index:900 !important;
 }
 #redactor-modal-overlay,
 #redactor-modal-box,

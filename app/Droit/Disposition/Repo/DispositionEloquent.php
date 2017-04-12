@@ -72,7 +72,8 @@ class DispositionEloquent implements DispositionInterface{
             'cote'        => (!empty($data['cote']) ? $data['cote'] : ''),
             'page'        => (!empty($data['page']) ? $data['page'] : ''),
             'content'     => (!empty($data['content']) ? $data['content'] : ''),
-            'subdivision' => (!empty($data['subdivision']) ? $data['subdivision'] : '')
+            'subdivision' => (!empty($data['subdivision']) ? $data['subdivision'] : ''),
+            'volume_id'   =>  $data['volume_id']
         ));
 
         if( ! $disposition )

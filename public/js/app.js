@@ -2257,6 +2257,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2267,6 +2268,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
+            loading: false,
             newLoi: {
                 name: "",
                 sigle: "",
@@ -2275,7 +2277,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newDisposition: {
                 volume_id: this.volume_id,
                 page: this.page,
-                loi_id: "",
+                loi_id: null,
                 article: "",
                 alinea: "",
                 chiffre: "",
@@ -2283,7 +2285,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             listLois: [],
             listDispositions: [],
-            addLoi: false
+            addLoi: false,
+            selected: null
         };
     },
 
@@ -2297,7 +2300,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         what: function what(val) {
             this.newDisposition.loi_id = val.value;
-            console.log(JSON.stringify(this.newLoi));
+            this.selected = val;
         },
         showAddLoi: function showAddLoi() {
             this.addLoi = true;
@@ -2320,21 +2323,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         addNewDisposition: function addNewDisposition() {
             var self = this;
-
+            this.loading = true;
             console.log(JSON.stringify(self.newDisposition));
-            //   axios.post('/admin/disposition', self.newDisposition).then(function (response) {
-            // self.updateDispositions(response.data.dispositions);
-            //})
-            //.catch(function (error) { console.log(error); });
+            axios.post('/admin/disposition/storeAjax', self.newDisposition).then(function (response) {
+
+                self.newDisposition = {
+                    volume_id: self.volume_id,
+                    page: self.page,
+                    loi_id: null,
+                    article: "",
+                    alinea: "",
+                    chiffre: "",
+                    lettre: ""
+                };
+
+                console.log(self.selected);
+                self.selected = null;
+                self.updateDispositions(response.data.dispositions);
+                self.loading = false;
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         updateDispositions: function updateDispositions(dispositions) {
             this.listDispositions = dispositions;
         },
         removeDisposition: function removeDisposition(id) {
             var self = this;
-
+            this.loading = true;
             axios.post('/admin/disposition/' + id, { '_method': 'DELETE' }).then(function (response) {
                 self.updateDispositions(response.data.dispositions);
+                self.loading = false;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -20084,12 +20103,12 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('ul', {
     staticClass: "dispositions"
-  }, _vm._l((_vm.listDispositions), function(disposition) {
-    return _c('li', [_c('div', {
+  }, [_vm._l((_vm.listDispositions), function(disposition) {
+    return (!_vm.loading) ? _c('li', [_c('div', {
       staticClass: "row"
     }, [_c('div', {
       staticClass: "col-md-10"
-    }, [_vm._v("\n                    " + _vm._s(disposition.article) + " " + _vm._s(disposition.aliena) + " " + _vm._s(disposition.chiffre) + " " + _vm._s(disposition.lettre) + " " + _vm._s(disposition.loi) + "\n                ")]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                    " + _vm._s(disposition.article) + " " + _vm._s(disposition.alinea) + " " + _vm._s(disposition.chiffre) + " " + _vm._s(disposition.lettre) + " " + _vm._s(disposition.loi) + "\n                ")]), _vm._v(" "), _c('div', {
       staticClass: "col-md-2 text-right"
     }, [_c('button', {
       staticClass: "btn btn-danger btn-xs",
@@ -20101,8 +20120,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.removeDisposition(disposition.id)
         }
       }
-    }, [_vm._v("x")])])])])
-  })), _vm._v(" "), _c('div', {
+    }, [_vm._v("x")])])])]) : _vm._e()
+  }), _vm._v(" "), (_vm.loading) ? _c('li', [_c('i', {
+    staticClass: "fa fa-spinner"
+  })]) : _vm._e()], 2), _vm._v(" "), _c('div', {
     staticClass: "terms"
   }, [_c('div', {
     staticClass: "row"
@@ -20111,12 +20132,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     staticClass: "control-label"
   }, [_vm._v("Loi")]), _vm._v(" "), _c('v-select', {
-    ref: "vselect",
     attrs: {
       "label": _vm.value,
-      "v-model": _vm.newDisposition.loi_id,
       "options": _vm.listLois,
       "onChange": _vm.what
+    },
+    model: {
+      value: (_vm.selected),
+      callback: function($$v) {
+        _vm.selected = $$v
+      },
+      expression: "selected"
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "col-md-4"
@@ -20227,7 +20253,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     },
     on: {
-      "click": _vm.addNewLoi
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.addNewLoi($event)
+      }
     }
   }, [_vm._v("créer")])])])])]) : _vm._e(), _vm._v(" "), _c('br'), _vm._v(" "), _c('input', {
     directives: [{
@@ -20377,7 +20406,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button"
     },
     on: {
-      "click": _vm.addNewDisposition
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.addNewDisposition($event)
+      }
     }
   }, [_vm._v("Ajouter")])])])])])
 },staticRenderFns: []}

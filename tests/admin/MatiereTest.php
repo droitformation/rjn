@@ -1,5 +1,9 @@
 <?php
 
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class MatiereTest extends TestCase {
 
     protected $mock;

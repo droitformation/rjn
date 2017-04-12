@@ -1,5 +1,9 @@
 <?php
 
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 use App\Droit\Service\Worker\SearchWorker;
 
 class SearchWorkerTest extends TestCase {
@@ -22,7 +26,7 @@ class SearchWorkerTest extends TestCase {
         $this->app->instance('App\Droit\Chronique\Repo\ChroniqueInterface', $this->chronique);
 
         $user = App\Droit\User\Entities\User::find(1);
-        $this->be($user);
+        $this->actingAs($user);
 
         $this->worker = new App\Droit\Service\Worker\SearchWorker();
 

@@ -1,5 +1,9 @@
 <?php
 
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 use App\Droit\Service\Worker\PageWorker;
 use App\Droit\Doctrine\Repo\DoctrineEloquent;
 use App\Droit\Chronique\Repo\ChroniqueEloquent;

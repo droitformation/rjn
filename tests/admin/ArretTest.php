@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ArretTest extends TestCase {
-
-    use WithoutMiddleware;
 
     protected $mock;
 
@@ -32,9 +32,7 @@ class ArretTest extends TestCase {
 	{
 
         $this->mock->shouldReceive('getAll')->once()->andReturn(new Illuminate\Database\Eloquent\Collection);
-        $response = $this->call('GET', '/admin/arret');
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->visit('admin/arret');
 
         $this->assertViewHas('arrets');
 	}

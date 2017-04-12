@@ -213,7 +213,7 @@ class HomeController extends Controller {
 
         $section = [ 'url' => 'jurisprudence/' , 'page' => 'Jurisprudence' ];
         $page    = [ 'page' => 'arrêt' ];
-
+  
         return view('frontend.arret')->with(array('arret' => $arret, 'critique' => $critique, 'section' => $section, 'page' => $page));
     }
 
