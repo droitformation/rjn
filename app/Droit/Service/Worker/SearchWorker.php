@@ -13,32 +13,14 @@ class SearchWorker{
         $this->doctrine  = \App::make('App\Droit\Doctrine\Repo\DoctrineInterface');
     }
 
-    public function search($lois,$params)
+    public function search($dispositions)
     {
-        if(!empty($params))
-        {
-            $dispositon = $lois->filter(function($loi) use ($params)
-            {
-                if(!empty($loi->disposition_pages))
-                {
-                    foreach($loi->disposition_pages as $pages){
-
-                        $division = $this->convertToArray($pages);
-
-                        if($this->find($params,$division))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            });
-
-            return $dispositon;
-        }
-        else
-        {
-            return $lois;
-        }
+        // dispositions found Get arrets with page and volume
+        return $dispositions->map(function ($item, $key) {
+            return $this->arret->getVolumePage($item->volume_id,$item->page);
+        })->reject(function ($value, $key) {
+            return !$value;
+        })->flatten(1)->unique('id');
     }
 
     public function findArret($found,$search)

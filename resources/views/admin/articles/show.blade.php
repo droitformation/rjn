@@ -15,7 +15,7 @@
         $helper  = new \App\Droit\Helper\Helper;
         $authors = $helper->withEmpty($authors);
 
-        $authors_article = ( ! $article->doctrine_author->isEmpty() ? $article->doctrine_author->lists('id')->all() : [] );
+        $authors_article = ( ! $article->doctrine_author->isEmpty() ? $article->doctrine_author->pluck('id')->all() : [] );
     ?>
 
     <div class="col-md-12">

@@ -45,7 +45,7 @@ class SearchController extends Controller {
 
     public function index(SearchRequest $request)
     {
-        $loi     = $request->input('loi',null);
+/*        $loi     = $request->input('loi',null);
         $article = $request->input('article',null);
 
         $params  = $this->worker->convertToArray($request->all());
@@ -53,18 +53,15 @@ class SearchController extends Controller {
         $sigle   = ($loi ? $this->loi->findSigle($loi)->sigle : '');
         $search  = $sigle.' ';
         $search .= ($article ? 'Art. '.$article.' ' : '');
-        $terms   =  $this->helper->convertSearchParams($params);
+        $terms   =  $this->helper->convertSearchParams($params);*/
 
-        $lois   = ($loi ? $this->disposition->search($loi,$article) : $this->disposition->searchByArticle($article));
-        $arrets = (!$lois->isEmpty() ? $this->worker->search($lois,$params) : []);
+        $results = $this->disposition->newsearch($request->except('_token'));
 
-        if(!empty($arrets))
-        {
-            $arrets =  $this->worker->findArret($arrets, ['loi' => $sigle, 'article' => $article]);
-        }
+       // $lois   = ($loi ? $this->disposition->search($loi,$article) : $this->disposition->searchByArticle($article));
+        $arrets = (!$results->isEmpty() ? $this->worker->search($results) : collect([]));
+        $terms = array_filter($request->except('_token'));
 
-        return view('frontend.search')->with(['arrets' => $arrets , 'searchterms' => $search.$terms, 'content' => 'Jurisprudence', 'type' => 'arret']);
-
+        return view('frontend.search')->with(['arrets' => $arrets , 'terms' => $terms, 'content' => 'Jurisprudence', 'type' => 'arret']);
     }
 
     public function searching(TermRequest $request){

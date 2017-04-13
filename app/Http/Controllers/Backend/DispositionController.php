@@ -91,12 +91,19 @@ class DispositionController extends Controller {
         $data_disposition = $request->only(['loi_id','volume_id','page','article']);
         $data_page = $request->only(['volume_id','page','alinea','chiffre','lettre']);
 
+        $this->validate($request, [
+            'loi_id'    => 'required',
+            'page'      => 'required',
+            'volume_id' => 'required',
+            'article'   => 'required',
+        ]);
+
         $disposition = $this->disposition->create([
             'loi_id'    => $data_disposition['loi_id'],
             'content'   => "",
             'volume_id' => $data_disposition['volume_id'],
             'page'      => $data_disposition['page'],
-            'cote'      => $data_disposition['article'],
+            'cote'      => 'Art. '.$data_disposition['article'],
         ]);
 
         $page = new \App\Droit\Disposition\Entities\Disposition_page($data_page);

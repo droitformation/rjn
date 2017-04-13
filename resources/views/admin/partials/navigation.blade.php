@@ -31,7 +31,7 @@
             <i class="fa fa-edit"></i> <span>Arrêts</span></a>
         </li>
         <li class="<?php echo (Request::is('admin/critique/*') ? 'active' : '' ); ?>"><a href="{{ url('admin/critique')  }}">
-                <i class="fa fa-flag"></i> <span>Critques</span></a>
+                <i class="fa fa-flag"></i> <span>Critique</span></a>
         </li>
         <li class="<?php echo (Request::is('admin/article/*') ? 'active' : '' ); ?>"><a href="{{ url('admin/article')  }}">
             <i class="fa fa-book"></i> <span>Articles de doctrine</span></a>

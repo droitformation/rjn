@@ -24,11 +24,6 @@
             </div>
             <div class="panel-body event-info">
 
-                <div class="panel-heading">
-                    <h4>Ajouter un contenu</h4>
-                </div>
-                <div class="panel-body event-info">
-
                     <div class="form-group">
                         <label for="message" class="col-sm-3 control-label">Contenu</label>
                         <div class="col-sm-7">

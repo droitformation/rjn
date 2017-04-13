@@ -3,7 +3,7 @@
 
 <div class="col-md-12">
     <div class="panel panel-inverse">
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('activate') }}">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('postActivate') }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="panel-body">
                 <h4 class="text-center" style="margin-bottom: 15px;">Re-activer votre accès</h4>

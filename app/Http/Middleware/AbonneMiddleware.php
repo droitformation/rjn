@@ -30,7 +30,7 @@ class AbonneMiddleware
 
         if(!$this->code->active(\Auth::user()->id))
         {
-            return redirect('auth/activate')->with(['status' => 'warning', 'message' => 'Votre compte sur rjne.ch n\'est plus valable.']);
+            return redirect('activate')->with(['status' => 'warning', 'message' => 'Votre compte sur rjne.ch n\'est plus valable.']);
         }
 
         return $next($request);

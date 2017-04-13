@@ -127,15 +127,17 @@ class ArretController extends Controller {
 
 		$dispositions = !$dispositions->isEmpty() ? $dispositions->map(function ($disposition, $key) {
 			return $disposition->disposition_pages->map(function ($dis, $key) use ($disposition) {
-				return [
-					'id'      => $disposition->id,
-					'loi'     => $disposition->loi->title,
-					'loi_id'  => $disposition->loi_id,
-					'article' => 'Art. '.$disposition->cote_number,
-					'alinea'  => !empty($dis->alinea) ? 'al. '.$dis->alinea : "",
-					'chiffre' => !empty($dis->chiffre) ? 'ch. '.$dis->chiffre : "",
-					'lettre'  => !empty($dis->lettre) ? 'let. '.$dis->lettre : "",
-				];
+				if(isset($disposition->loi)){
+					return [
+						'id'      => $disposition->id,
+						'loi'     => $disposition->loi->title,
+						'loi_id'  => $disposition->loi_id,
+						'article' => 'Art. '.$disposition->cote_number,
+						'alinea'  => !empty($dis->alinea) ? 'al. '.$dis->alinea : "",
+						'chiffre' => !empty($dis->chiffre) ? 'ch. '.$dis->chiffre : "",
+						'lettre'  => !empty($dis->lettre) ? 'let. '.$dis->lettre : "",
+					];
+				}
 			});
 		})->flatten(1) : collect([]);
 

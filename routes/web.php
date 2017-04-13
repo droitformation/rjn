@@ -95,17 +95,12 @@ Route::get('testing', function()
     */
 
     // App\Droit\Matiere\Repo\MatiereInterface
-    //$matiere = \App::make('App\Droit\Matiere\Repo\MatiereInterface');
-    /*
-        $abo  = new \App\Droit\User\Worker\AboWorker(\App::make('App\Droit\User\Repo\UserInterface'));
-        $auth = new \App\Services\Hub(\App::make('App\Droit\User\Repo\UserInterface'), \App::make('App\Droit\User\Worker\AboWorker'));
+    $model = \App::make('App\Droit\Disposition\Repo\DispositionInterface');
+    $result = $model->newsearch(['loi' => 10, 'article' => 23]);
 
-        $abos = $abo->usersDontHaveAcount()->updateAccounts();*/
-
-    //$exist = $abo->emailExistAlready('etude.bietry@bluewin.ch');
-    //$abo->allAbos();
-    //$data = $abo->sortUsers();
-
+    echo '<pre>';
+    print_r($result);
+    echo '</pre>';exit();
 });
 
 

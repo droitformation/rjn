@@ -36,7 +36,39 @@ class DispositionEloquent implements DispositionInterface{
         }
 
         return $loi->with(['disposition_pages'])->orderBy('volume_id', 'DESC')->get();
+    }
 
+    public function newsearch($terms)
+    {
+        $loi = $this->disposition->with(['disposition_pages']);
+
+        if(isset($terms['loi'])){
+            $loi->where('loi_id','=',$terms['loi']);
+        }
+
+        if(isset($terms['article'])){
+            $loi->where('cote','=',$terms['article']);
+        }
+
+        if(isset($terms['aliena'])){
+            $loi->whereHas('disposition_pages', function ($query) use ($terms) {
+                $query->where('aliena', '=', $terms['aliena']);
+            });
+        }
+
+        if(isset($terms['chiffre'])){
+            $loi->whereHas('disposition_pages', function ($query) use ($terms) {
+                $query->where('chiffre', '=', $terms['chiffre']);
+            });
+        }
+
+        if(isset($terms['lettre'])){
+            $loi->whereHas('disposition_pages', function ($query) use ($terms) {
+                $query->where('lettre', '=', $terms['lettre']);
+            });
+        }
+
+        return $loi->orderBy('volume_id', 'DESC')->get();
     }
 
     public function searchByArticle($article){

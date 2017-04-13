@@ -15,7 +15,7 @@
         $helper  = new \App\Droit\Helper\Helper;
         $authors = $helper->withEmpty($authors);
 
-        $authors_chronique = ( ! $chronique->author_chronique->isEmpty() ? $chronique->author_chronique->lists('id')->all() : [] );
+        $authors_chronique = ( ! $chronique->author_chronique->isEmpty() ? $chronique->author_chronique->pluck('id')->all() : [] );
     ?>
 
     <div class="col-md-12">

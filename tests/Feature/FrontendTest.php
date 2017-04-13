@@ -33,18 +33,4 @@ class FrontendTest extends TestCase
         $this->get('historique')->assertStatus(200);
         $this->get('contact')->assertStatus(200);
     }
-
-    public function testSeeArret()
-    {
-        $arret = factory(\App\Droit\Arret\Entities\Arret::class)->create();
-
-        $this->get('/arret/'.$arret)->assertStatus(302);
-
-        $user = factory(\App\Droit\User\Entities\User::class)->create();
-        $code = factory(\App\Droit\Code\Entities\Code::class)->create(['user_id' => $user->id]);
-
-        $this->actingAs($user);
-
-        $this->get('http://rjnew.local/arret/'.$arret)->assertStatus(200);
-    }
 }

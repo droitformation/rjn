@@ -42,6 +42,9 @@ class RjnComposer
         $this->volumes     = $this->rjn->getAll();
 
         $lois = $this->loi->getAll();
+
+        $view->with('list_lois', $lois->pluck('sigle','id')->all());
+
         $lois = $this->helper->dispatchLoi($lois);
 
         $view->with('domains_jurisprudence', $domains->pluck('title','id')->all());

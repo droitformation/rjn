@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Droit\User\Worker\AboWorker;
 use App\Droit\User\Repo\UserInterface;
 use App\Droit\Code\Worker\CodeWorkerInterface;
-use Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller {
 
+    use AuthenticatesUsers;
 
     protected $redirectPath = 'admin';
     protected $user;
@@ -28,8 +29,6 @@ class AuthController extends Controller {
         $this->abo  = $abo;
         $this->code = $code;
         $this->user = $user;
-
-		$this->middleware('guest');
 	}
 
     /**
@@ -64,21 +63,15 @@ class AuthController extends Controller {
         $code = $this->code->valid($request->input('code'));
 
         // Code is not valid
-        if(!$code)
-        {
-            return redirect('auth/code')->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce code n\'est pas valide']);
+        if(!$code) {
+            return redirect('code')->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce code n\'est pas valide']);
         }
 
         // Validate accoutn credetials
-        $validator = $this->validator($request->all());
-
-        if ($validator->fails())
-        {
-            $this->throwValidationException($request, $validator);
-        }
+        $this->validateLogin($request);
 
         // Create new user
-        $user = $this->create($request->all());
+        $user = $this->user->create($request->all());
 
         // Update code and mark used by new user
         $this->code->markUsed($code->id,$user->id);
@@ -100,24 +93,19 @@ class AuthController extends Controller {
         $code = $this->code->valid($request->input('code'));
 
         // Code is not valid
-        if(!$code)
-        {
-            return redirect('auth/code')->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce code n\'est pas valide']);
+        if(!$code) {
+            return redirect()->back()->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce code n\'est pas valide']);
         }
 
         $this->validateLogin($request);
 
-        $credentials = $this->getCredentials($request);
-
-        if(\Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember')))
+        if($this->attemptLogin($request))
         {
-            $user = \Auth::user();
-
-            $this->code->markUsed($code->id,$user->id);
+            $this->code->markUsed($code->id,\Auth::user()->id);
 
             return redirect()->intended('/')->with(['status' => 'success', 'message' => 'Votre compte sur rjne.ch est maintenant actif.']);
         }
 
-        return redirect('auth/activate')->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce compte n\'existe pas']);
+        return redirect('activate')->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce compte n\'existe pas']);
     }
 }

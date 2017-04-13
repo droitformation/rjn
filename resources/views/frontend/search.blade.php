@@ -10,7 +10,18 @@
         @if($arrets)
 
         <div class="arrets-list">
-            <h3>Recherche: <strong>{{ $searchterms }}</strong> dans <strong>Jurisprudence</strong></h3>
+            <h3>
+                Recherche:
+
+                @if(!empty($terms))
+                    @foreach($terms as $type => $term)
+                        <?php $type = ($type == 'loi' && isset($list_lois[$term]) ? $list_lois[$term] : $type); ?>
+                        <strong>{{ $type }} {{ $term }}</strong>
+                    @endforeach
+                @endif
+
+                dans <strong>Jurisprudence</strong>
+            </h3>
             <br/>
             @foreach($arrets as $arret)
             <div class="arrets-list-item row">
