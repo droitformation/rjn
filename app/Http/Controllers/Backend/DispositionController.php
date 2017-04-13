@@ -103,7 +103,7 @@ class DispositionController extends Controller {
             'content'   => "",
             'volume_id' => $data_disposition['volume_id'],
             'page'      => $data_disposition['page'],
-            'cote'      => 'Art. '.$data_disposition['article'],
+            'cote'      => $data_disposition['article'],
         ]);
 
         $page = new \App\Droit\Disposition\Entities\Disposition_page($data_page);

@@ -15,8 +15,7 @@
 
                 @if(!empty($terms))
                     @foreach($terms as $type => $term)
-                        <?php $type = ($type == 'loi' && isset($list_lois[$term]) ? $list_lois[$term] : $type); ?>
-                        <strong>{{ $type }} {{ $term }}</strong>
+                        <strong>{{ ($type == 'loi' && isset($list_lois[$term]) ? $list_lois[$term] : $type.' '.$term) }}</strong>
                     @endforeach
                 @endif
 
