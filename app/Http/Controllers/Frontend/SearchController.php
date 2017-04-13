@@ -45,19 +45,8 @@ class SearchController extends Controller {
 
     public function index(SearchRequest $request)
     {
-/*        $loi     = $request->input('loi',null);
-        $article = $request->input('article',null);
-
-        $params  = $this->worker->convertToArray($request->all());
-
-        $sigle   = ($loi ? $this->loi->findSigle($loi)->sigle : '');
-        $search  = $sigle.' ';
-        $search .= ($article ? 'Art. '.$article.' ' : '');
-        $terms   =  $this->helper->convertSearchParams($params);*/
-
         $results = $this->disposition->newsearch($request->except('_token'));
 
-       // $lois   = ($loi ? $this->disposition->search($loi,$article) : $this->disposition->searchByArticle($article));
         $arrets = (!$results->isEmpty() ? $this->worker->search($results) : collect([]));
         $terms = array_filter($request->except('_token'));
 

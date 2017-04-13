@@ -1,7 +1,6 @@
 <?php namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Factory;
 
 class SearchRequest extends FormRequest {
 
