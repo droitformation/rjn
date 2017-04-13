@@ -75,7 +75,7 @@
                 <div class="form-group">
                     <label for="message" class="col-sm-3 control-label">Références</label>
                     <div class="col-sm-9">
-                        {!! Form::text('cotes', $arret->cotes , array('class' => 'form-control') ) !!}
+                        <input type="text" name="cotes" class="form-control" style="background:#fffdf5;border-color:#fee142;" value="{{ $arret->cotes }}">
                     </div>
                 </div>
 
