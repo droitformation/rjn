@@ -12,7 +12,7 @@
                     <div class="col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-check-circle text-info"></i></span>
-                            <input type="text" class="form-control" id="code" value="{{ old('code') }}" name="code" placeholder="Code d'accès">
+                            <input type="text" class="form-control" required id="code" value="{{ old('code') }}" name="code" placeholder="Code d'accès">
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input type="text" class="form-control" id="email" value="{{ old('email') }}" name="email" placeholder="Email">
+                            <input type="text" class="form-control" required id="email" value="{{ old('email') }}" name="email" placeholder="Email">
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <div class="col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
+                            <input type="password" class="form-control" required id="password" name="password" placeholder="Mot de passe">
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="col-sm-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password_confirmation" placeholder="Confirmation du mot de passe">
+                            <input type="password" class="form-control" required id="password" name="password_confirmation" placeholder="Confirmation du mot de passe">
                         </div>
                     </div>
                 </div>
