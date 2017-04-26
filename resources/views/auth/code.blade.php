@@ -21,7 +21,7 @@
                     <div class="col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nom">
+                            <input type="text" class="form-control" required name="name" value="{{ old('name') }}" placeholder="Nom">
                         </div>
                     </div>
                 </div>
