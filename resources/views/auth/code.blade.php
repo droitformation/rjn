@@ -4,7 +4,7 @@
 <div class="col-md-12">
     <div class="panel panel-inverse">
         <form class="form-horizontal" role="form" method="POST" action="{{ url('postCode') }}">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            {!! csrf_field() !!}
             <div class="panel-body">
                 <h4 class="text-center" style="margin-bottom: 15px;">Obtenir un accès</h4>
                 <p>Veuillez saisir le <strong>code d'accès</strong> indiqué sur le votre exemplaire du RJN, une adresse <strong>email</strong> ainsi qu'un mot de passe</p>
