@@ -7,6 +7,7 @@ use App\Droit\User\Worker\AboWorker;
 use App\Droit\User\Repo\UserInterface;
 use App\Droit\Code\Worker\CodeWorkerInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller {
 
@@ -68,7 +69,7 @@ class AuthController extends Controller {
         }
 
         // Validate accoutn credetials
-        $this->validateLogin($request);
+        $this->validator($request->all())->validate();
 
         // Create new user
         $user = $this->user->create($request->all());
@@ -97,8 +98,6 @@ class AuthController extends Controller {
             return redirect()->back()->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce code n\'est pas valide']);
         }
 
-        $this->validateLogin($request);
-
         if($this->attemptLogin($request))
         {
             $this->code->markUsed($code->id,\Auth::user()->id);
@@ -107,5 +106,20 @@ class AuthController extends Controller {
         }
 
         return redirect('activate')->withInput($request->all())->with(['status' => 'danger', 'message' => 'Ce compte n\'existe pas']);
+    }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
     }
 }
