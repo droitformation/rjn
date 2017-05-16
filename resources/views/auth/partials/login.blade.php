@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a href="{{ url('password/email') }}" class="pull-left btn btn-link" style="padding-left:0">Mot de passe perdu?</a>
+        <a href="{{ url('password/reset') }}" class="pull-left btn btn-link" style="padding-left:0">Mot de passe perdu?</a>
         <div class="pull-right">
             @if($page == 'login')
                 <a href="{{ url('/') }}" class="btn btn-default">Retour au site</a>

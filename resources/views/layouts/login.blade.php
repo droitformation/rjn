@@ -35,16 +35,16 @@
         @endif
 
         @if(Session::has('status'))
-
+            <?php
+                $status = Session::get('status');
+                $color   = $status == 'warning' ? $status : 'success';
+                $message = (Session::get('status') == 'warning' || Session::get('status') == 'success') ? Session::get('message') : Session::get('status');
+            ?>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert alert-dismissable alert-{{ Session::get('status') }}">
+                    <div class="alert alert-dismissable alert-{{ $color }}">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                        @if(Session::has('message'))
-                            <p>{!! Session::get('message') !!}</p>
-                        @endif
-
+                        <p>{!! $message !!}</p>
                     </div>
                 </div>
             </div>
