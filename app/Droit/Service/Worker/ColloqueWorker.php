@@ -28,7 +28,7 @@ class ColloqueWorker{
 
     public function getArchives(){
 
-        $response   = $this->client->get($this->base_url.'/event?name=RJN&archive');
+        $response   = $this->client->get($this->base_url.'/event?name=RJN&archive=1');
         $data       = json_decode($response->getBody(), true);
 
         $collection = new \Illuminate\Support\Collection($data['data']);
