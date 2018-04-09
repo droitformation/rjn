@@ -754,6 +754,24 @@ ol, ul {
     visibility: hidden;
 }
 
+#considerant table{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#considerant table td{
+    border: 1px solid #e7e7e7;
+    text-align: center;
+}
+
+#considerant table td p{
+    text-align: center;
+}
+
+#considerant table td:first-child p{
+    text-align: left;
+}
+
 /*phone*/
 @media (max-width: 767px) {
 	.navbar-fixed-top + section{

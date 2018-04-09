@@ -50,7 +50,10 @@
                         <div class="post-sum">
                             <div class="text-indent">{!! $arret->portee !!}</div>
                             <div>{!! $arret->faits !!}</div>
-                            <div id="considerant">{!! $arret->considerant !!}</div>
+                            <div id="considerant">
+                                <p><strong>Considérant</strong></p>
+                                {!! $arret->considerant !!}
+                            </div>
                             <div>{!! $arret->droit !!}</div>
                             <div>{!! $arret->conclusion !!}</div>
                             <hr/>
