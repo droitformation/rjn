@@ -37,8 +37,8 @@
         @if(Session::has('status'))
             <?php
                 $status = Session::get('status');
-                $color   = $status == 'warning' ? $status : 'success';
-                $message = (Session::get('status') == 'warning' || Session::get('status') == 'success') ? Session::get('message') : Session::get('status');
+                $color   = $status == 'warning' || $status == 'danger' ? $status : 'success';
+                $message = (Session::get('status') == 'warning' || Session::get('status') == 'danger' || Session::get('status') == 'success') ? Session::get('message') : Session::get('status');
             ?>
             <div class="row">
                 <div class="col-md-12">
