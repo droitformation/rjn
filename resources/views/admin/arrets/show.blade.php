@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="message" class="col-sm-3 control-label">Somaire</label>
+                    <label for="message" class="col-sm-3 control-label">Sommaire</label>
                     <div class="col-sm-9">
                         {!! Form::textarea('sommaire', $arret->sommaire , array('class' => 'form-control', 'cols' => '50' , 'rows' => '4' )) !!}
                     </div>
